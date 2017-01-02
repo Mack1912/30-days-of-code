@@ -15,7 +15,9 @@ public class Solution {
         while( i < N ) {
         	a[i++] = sc.nextInt();
         }
-        int arr[][] = new int[N][N];
+        
+        
+        int arr[][] = new int[(int) Math.pow(2, N)][N];
 
         boolean firstLargest;
         int current;
@@ -60,6 +62,46 @@ public class Solution {
         
         System.out.println("longest : " + longestSequence);
         
+        
+        int t2[] = new int[(int)Math.pow(2, N)];
+        x = 0;
+        y = 0;
+        int p = longestSequence-1;
+        int sum = 0;
+        int k = 0;
+        
+        while(arr[x][0] != 0){		// x loops here
+        	while(arr[x][y] != 0) {		// y loops here for each row
+        		t2[k] = t2[k] + arr[x][y]*(int)Math.pow(10, p);
+        		p--;        		        		
+        		y++;
+        	}
+        	if(y != longestSequence) {
+        		t2[k] = 0;
+        	} else {
+        		k++;
+        	}
+        	x++; 
+        	y = 0;
+        	p = longestSequence-1;
+        }
+        
+        int temp[] = new int[k];
+        for(int r = 0; r < k; r++)
+        	temp[r] = t2[r];
+        
+        Arrays.sort(temp);
+        
+        if(k >= K) {
+        	String s = temp[K-1] + "";
+        	char number[] = s.toCharArray();
+        	for(char c : number)
+        		System.out.print(c + " ");
+        	
+        	
+        } else {
+        	System.out.println("-1");
+        }
 
     }
 }
